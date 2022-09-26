@@ -1,5 +1,6 @@
 ![qbo-home](./qbo-home.png)
 
+
 - [`QBO Home`](#qbo-home)
 - [Features](#features)
 - [Download](#download)
@@ -200,7 +201,7 @@ sudo dnf install jq
 ```
 # Start QBO API
 
-> Start the QBO API to start creating cluster using `kind` images and access the web UI.
+> Start the QBO API to create clusters using `kind` images and access the web UI.
 > 
 ```
 ./qbo start api 
