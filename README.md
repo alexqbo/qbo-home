@@ -13,6 +13,7 @@
   - [Linux](#linux)
     - [inotify](#inotify)
     - [cgroups](#cgroups)
+- [Start QBO API](#start-qbo-api)
 - [Web Interface](#web-interface)
 - [QBO CLI](#qbo-cli)
 - [Cluster Operations](#cluster-operations)
@@ -197,6 +198,13 @@ References:
 
 ``` 
 sudo dnf install jq
+```
+# Start QBO API
+
+> Start the QBO API to start creating cluster using `kind` images and access the web UI.
+> 
+```
+./qbo start api 
 ```
 
 # Web Interface
