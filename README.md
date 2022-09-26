@@ -1,6 +1,5 @@
 ![qbo-home](./qbo-home.png)
 
-
 - [`QBO Home`](#qbo-home)
 - [Features](#features)
 - [Download](#download)
