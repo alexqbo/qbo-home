@@ -1,5 +1,6 @@
 ![qbo-home](./qbo-home.png)
 
+![QBO web interface](qbo_web_interface.gif)
 
 - [`QBO Home`](#qbo-home)
 - [Features](#features)
