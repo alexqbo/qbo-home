@@ -36,7 +36,9 @@
 
 # `QBO Home`
 
-QBO is the fastest and easiet k8s deployment out there. It uses Docker in Docker [https://kind.sigs.k8s.io/](https://kind.sigs.k8s.io/) node images to deploy k8s clusters in seconds in MAC and Linux. It has a web graphical interface and a Websockets API. It doesn't require virtual machines
+QBO is the fastest and easiet k8s deployment out there. It uses Docker in Docker [https://kind.sigs.k8s.io/](https://kind.sigs.k8s.io/) node images to deploy k8s clusters in seconds in MAC and Linux. It has a web graphical interface and a Websockets API. It doesn't require virtual machines. It is written in C and runs in docker.
+
+> See here for latest image: https://hub.docker.com/repository/docker/eadem/qbo-api
 
 Compatible with docker kind images [https://hub.docker.com/r/kindest/node/tags](https://hub.docker.com/r/kindest/node/tags)
 
