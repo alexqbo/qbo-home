@@ -124,10 +124,10 @@ EOF
 cat << EOF > ~/.qbo/api.json
 {
 "registry_user":"alex",
-"registry_auth":"git.eadem.com",
+"registry_auth":"git.gitlab.com",
 "registry_token":"4Xo5X241L5vmsFSpkzXX",
 "registry_repo":"qbo-home",
-"registry_hostname":"registry.eadem.com",
+"registry_hostname":"registry.gitlab.com",
 "registry_type":"gitlab"
 }
 E0F

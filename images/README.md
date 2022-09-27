@@ -7,7 +7,7 @@
   - [GitLab Registry](#gitlab-registry)
   - [Find latest tag](#find-latest-tag)
   - [Build Kind Base Image](#build-kind-base-image)
-  - [Build Kind Node Image v1.25.2](#build-kind-node-image-v1252)
+  - [Build Kind Node](#build-kind-node)
 
 # Custom Kind Images
 
@@ -28,15 +28,23 @@
 vi image
 ```
 
-> Replace the following values with your Gitlab configuration.
+> Make sure you are logged in with `docker login registry.gitlab.com`
 
+> Assuming the following registry push:
+> `docker push registry.gitlab.com/alex1472/qbo-home`
+> 
+
+> For more details refer to Gitlab docs: https://docs.gitlab.com/ee/user/packages/container_registry/index.html
+
+> Replace the following values with your Gitlab configuration.
+> 
 ```
 ### BEGIN GITLAB ###
 
-REGISTRY=replace_with_gitlab_registry
-API=replace_with_gitlab_api
-OWNER=replace_wtih_gitlab_user
-REPO=replace_with_gitlab_repo
+REGISTRY=registry.gitlab.com
+API=gitlab.com
+OWNER=alex1476
+REPO=qbo-home
 
 ### END GITLAB ###
 
@@ -96,7 +104,8 @@ v1.25.2
 ./image build base
 ```
 
-## Build Kind Node Image v1.25.2
+## Build Kind Node 
+> Example: Image with K8s version: v1.25.2
 > For more info see https://kind.sigs.k8s.io/docs/design/node-image/
 
 ```
