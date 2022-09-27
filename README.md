@@ -40,7 +40,7 @@ QBO is the fastest and easiest k8s deployment out there. It uses Docker in Docke
 
 > See here for latest image: https://hub.docker.com/repository/docker/eadem/qbo-api
 
-Compatible with docker kind images [https://hub.docker.com/r/kindest/node/tags](https://hub.docker.com/r/kindest/node/tags)
+Compatible with docker `Kind` images [https://hub.docker.com/r/kindest/node/tags](https://hub.docker.com/r/kindest/node/tags)
 
 # Features
 
