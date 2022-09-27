@@ -1,0 +1,158 @@
+#!/bin/bash
+
+#set -x 
+
+
+### BEGIN GITLAB ###
+
+REGISTRY=replace_with_gitlab_registry
+API=replace_with_gitlab_api
+OWNER=replace_wtih_gitlab_user
+REPO=replace_with_gitlab_repo
+
+### END GITLAB ###
+
+### KIND ###
+BASE_IMG="kindest/base:latest"
+KIND_REPO="~/git/kind"
+
+### K8S ###
+K8S_REPO="~/git/kubernetes"
+
+
+
+# buildx
+# https://github.com/docker/buildx#linux-packages
+
+
+exit_on_error() {
+    exit_code=$1
+    last_command=${@:2}
+    if [ $exit_code -ne 0 ]; then
+        >&2 echo "\"${last_command}\" command failed with exit code ${exit_code}."
+        exit $exit_code
+    fi
+}
+
+
+usage() {
+
+echo "$0 list k8s                          - list all remote tags"
+echo "$0 list registry                     - list qbo nodes tags in registry"
+echo "$0 last {tag}                        - get lastest tags from https://github.com/kubernetes/kubernetes.git (default v1.18.19)"
+echo "$0 build base                        - build base image"
+echo "$0 build node {tag}                  - build node image"
+    exit 1
+
+}
+
+if [ -z $1 ]; then 
+
+usage
+
+fi
+
+if [ $1 = "list" ]; then
+    if [ -z $2 ]; then
+        usage
+    fi
+    if [ $2 = "k8s" ]; then
+        # get all tags from https://github.com/kubernetes/kubernetes.git remote
+        git ls-remote --tags -t --refs --sort=-v:refname https://github.com/kubernetes/kubernetes.git | more
+    elif [ $2 = "registry" ]; then
+
+        CI_PROJECT_PATH="$OWNER/$REPO/node"
+        AUTHURL=https://$API
+        URL=https://$REGISTRY
+
+        service=container_registry&scope="repository:s:pull"
+
+        TOKEN=$(curl --silent --header "PRIVATE-TOKEN: " \
+            -G ${AUTHURL}/jwt/auth \
+            -d service=container_registry \
+            -d scope="repository:${CI_PROJECT_PATH}:pull" \
+            | jq -r '.token')
+
+        #echo $TOKEN
+        BEARER="Authorization:Bearer $TOKEN"
+
+        echo "${URL}/v2/$CI_PROJECT_PATH/tags/list"
+
+        REGISTRY_TAG_LIST=$(curl --silent --header "$BEARER" ${URL}/v2/$CI_PROJECT_PATH/tags/list)
+        echo $REGISTRY_TAG_LIST
+    fi
+
+elif [ $1 = "last" ]; then
+    if [ -z $2 ]; then
+        usage
+    fi
+    # get lastest tag from version
+    git ls-remote --tags -t --refs --sort=-v:refname https://github.com/kubernetes/kubernetes.git  | grep -v "\-[a-Z]" | cut -f3 -d'/' | grep $2 | head -1
+elif [ $1 = "build" ]; then
+    if [ -z $2 ]; then
+        usage
+    fi
+
+    if [ $2 = "base" ]; then
+
+        if [ ! -d "$KIND_REPO" ]; then
+
+            git clone https://github.com/kubernetes-sigs/kind.git ~/kind
+            KIND_REPO=~/kind
+
+        fi
+
+        cd $KIND_REPO
+        TAG=latest make -C images/base quick
+        exit_on_error $?
+
+        exit 0
+
+    elif [ $2 = "node" ]; then
+        #git checkout tags/$1 -f
+
+        if [ -z $3 ]; then
+            usage
+        fi
+
+        # checkout tag
+
+        if [ ! -d "$K8S_REPO" ]; then
+
+            git clone https://github.com/kubernetes/kubernetes.git ~/kubernetes
+            K8S_REPO=~/kubernetes
+
+        fi
+
+        cd $K8S_REPO
+        git fetch
+        git checkout tags/$3
+        exit_on_error $?
+
+        TAG=$(git describe --tags)
+        # build kubenetes
+
+        if [ ! -d "$KIND_REPO" ]; then
+
+            git clone https://github.com/kubernetes-sigs/kind.git ~/kind
+            KIND_REPO=~/kind
+            make build
+
+        fi
+
+        cd $KIND_REPO
+        ./bin/kind build node-image --kube-root $K8S_REPO --base-image ${BASE_IMG} --image $REGISTRY/$OWNER/$REPO/node:${TAG}
+        docker image push $REGISTRY/$OWNER/$REPO/node:${TAG}
+
+        exit 0
+
+
+    else
+        usage
+    fi
+
+
+else
+    usage
+    
+fi

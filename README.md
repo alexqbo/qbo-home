@@ -30,6 +30,9 @@
   - [Get Clusters](#get-clusters)
 - [kubectl configuration](#kubectl-configuration)
 - [Logs](#logs)
+- [Custom Kind Images](#custom-kind-images)
+- [Nginx Ingress Controller](#nginx-ingress-controller)
+- [Istio](#istio)
 
 # `QBO Home`
 
@@ -357,4 +360,24 @@ qbo logs api -f
 ```
 qbo logs api
 ```
+
+# Custom Kind Images
+
+[images/README.md](images/README.md)
+
+
+# Nginx Ingress Controller
+> Use the kind provider `deploy.yaml`  https://github.com/kubernetes/ingress-nginx/tree/main/deploy/static/provider/kind
+
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+```
+
+# Istio
+
+> Follow the instruction as described in the official Istio site
+
+[https://istio.io/latest/docs/setup/install/istioctl/](https://istio.io/latest/docs/setup/install/istioctl/)
+
+
 
