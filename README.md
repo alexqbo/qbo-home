@@ -377,7 +377,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 
 # Istio
 
-> Follow the instruction as described in the official Istio site
+> Follow the instructions as described in the official Istio site
 
 [https://istio.io/latest/docs/setup/install/istioctl/](https://istio.io/latest/docs/setup/install/istioctl/)
 

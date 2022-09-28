@@ -316,6 +316,12 @@ function start {
 EOF
     fi
 
+    if [ ! -f ~/.qbo/cli.json ]; then
+ cat << EOF > ~/.qbo/cli.json
+{"api_ip":"localhost", "cli_ssl":"0"}
+EOF
+    fi
+
     g=0
     if [ $machine = "Linux" ]; then
         echo "OS = $machine"
