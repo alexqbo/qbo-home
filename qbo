@@ -275,7 +275,7 @@ usage() {
     echo " -d                   -- start with valgrind"
     echo "qbo stop api          -- stop $bin api"
     echo "qbo attach terminal   -- attach $bin. (CTRL-p, CTL-q) to exit"
-    echo "qbo logs              -- get $bin logs" 
+    echo "qbo logs api          -- get $bin logs" 
     echo " -f                   -- follow logs"
     exit 1
 }
@@ -289,7 +289,9 @@ function start {
         # if [ $ -z "$i" ]; then
         #     docker stop $i
         # fi
-        docker rm $(docker ps -qa) -f
+        if [ ! -z $(docker ps -qa) ]; then
+            docker rm $(docker ps -qa) -f
+        fi
         docker system prune -f
         sudo rm -f ~/.qbo/cache.db
         sudo rm -f ~/.qbo/.qbo.db

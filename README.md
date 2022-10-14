@@ -1,7 +1,7 @@
-![qbo-home](./qbo-home.png)
+![qbo-home](./qbo_250x150.svg)
 
 
-- [`QBO Home`](#qbo-home)
+- [`QBO Home Edition`](#qbo-home-edition)
 - [Features](#features)
 - [Download](#download)
 - [Configuration](#configuration)
@@ -34,7 +34,7 @@
 - [Nginx Ingress Controller](#nginx-ingress-controller)
 - [Istio](#istio)
 
-# `QBO Home`
+# `QBO Home Edition`
 
 QBO is the fastest and easiest k8s deployment out there. It uses Docker in Docker [https://kind.sigs.k8s.io/](https://kind.sigs.k8s.io/) node images to deploy k8s clusters in seconds in MAC and Linux. It has a web graphical interface and a Websockets API. It doesn't require virtual machines. It is written in C and runs in docker.
 
