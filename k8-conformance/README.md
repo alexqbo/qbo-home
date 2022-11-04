@@ -25,8 +25,8 @@ cd qbo-home
 > Once the cluster has been created you can use the following script to get the results
 
 ```
-cd cncf
-./cncf.sh ~/.qbo/test.conf
+cd k8-conformance
+./sonobuoy.sh ~/.qbo/test.conf
 ```
 
 
