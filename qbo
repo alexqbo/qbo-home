@@ -289,9 +289,7 @@ function start {
         # if [ $ -z "$i" ]; then
         #     docker stop $i
         # fi
-        if [ ! -z $(docker ps -qa) ]; then
-            docker rm $(docker ps -qa) -f
-        fi
+        docker rm $(docker ps -qa) -f
         docker system prune -f
         sudo rm -f ~/.qbo/cache.db
         sudo rm -f ~/.qbo/.qbo.db

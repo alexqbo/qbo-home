@@ -1,4 +1,7 @@
-![qbo-home](./qbo_250x150.svg)
+<p float="left">
+  <img src="./qbo_250x150.svg" width="400" style="vertical-align: middle;"/>
+  <a href="https://github.com/cncf/k8s-conformance/tree/master/v1.25/qbo"><img src="./certified-kubernetes-color.svg" width="150" style="vertical-align: middle; margin-left:40px" alt="Certified Kubernetes" /></a>
+</p>
 
 
 - [`QBO Home Edition`](#qbo-home-edition)
